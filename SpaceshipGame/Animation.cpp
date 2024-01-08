@@ -1,18 +1,21 @@
 #include "Animation.h"
 #include "Background.h"
 #include "Spaceship.h"
+#include "ProjectileSet.h"
 #include "util.h"
 
 #include <ctime>
 #include <cstdlib>
 #include <d2d1_3.h>
+#include <memory>
 #pragma comment(lib, "d2d1.lib")
 
 namespace {
     ID2D1Factory7* d2d_factory = nullptr;
     ID2D1HwndRenderTarget* d2d_render_target = nullptr;
-    Background background;
-    Spaceship spaceship;
+    std::shared_ptr<Background> background = nullptr;
+    std::shared_ptr<Spaceship> spaceship = nullptr;
+    std::shared_ptr<ProjectileSet> projectile_set = nullptr;
 
     D2D1_COLOR_F const clear_color = {
         .r = 0.0f, .g = 0.0f, .b = 0.0f, .a = 1.0f
@@ -51,15 +54,17 @@ void paint(HWND hwnd) {
         srand(static_cast<unsigned> (time(0)));
         init_d2d(hwnd);
         hr_check(CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED));
-        background = Background(d2d_render_target);
-        spaceship = Spaceship(d2d_render_target, L"assets/spaceship.png");
+        background = std::make_shared<Background>(d2d_render_target);
+        spaceship = std::make_shared<Spaceship>(d2d_render_target, L"assets/spaceship.png");
+        projectile_set = std::make_shared<ProjectileSet>(d2d_render_target, spaceship);
     }
 
     d2d_render_target->BeginDraw();
     d2d_render_target->Clear(clear_color);
 
-    background.draw();
-    spaceship.draw();
+    background->draw();
+    projectile_set->draw();
+    spaceship->draw();
 
     hr_check(d2d_render_target->EndDraw());
 

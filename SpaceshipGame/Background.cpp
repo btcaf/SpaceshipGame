@@ -1,14 +1,11 @@
 #include "Background.h"
 #include "util.h"
 
-Background::Background() {
-    d2d_render_target = nullptr;
-}
+Background::Background() {}
 
 Background::Background(ID2D1HwndRenderTarget* _d2d_render_target) {
 	d2d_render_target = _d2d_render_target;
     D2D1_GRADIENT_STOP rad_stops_data[2];
-    ID2D1GradientStopCollection* rad_stops = nullptr;
 
     rad_stops_data[0] = {
         .position = 0.0f, .color = inner_color
@@ -28,7 +25,7 @@ Background::Background(ID2D1HwndRenderTarget* _d2d_render_target) {
     if (rad_stops) {
         hr_check(d2d_render_target->CreateRadialGradientBrush(
             D2D1::RadialGradientBrushProperties(
-                center, D2D1::Point2F(0, 0), 400, 450
+                center, D2D1::Point2F(0, 0), gradient_radius, gradient_radius
             ),
             rad_stops,
             &rad_brush
@@ -79,7 +76,8 @@ void Background::draw() {
             0, 
             0, 
             d2d_render_target->GetSize().width, 
-            d2d_render_target->GetSize().height),
+            d2d_render_target->GetSize().height
+        ),
 		rad_brush
 	);
 }
