@@ -5,6 +5,10 @@ ProjectileSet::ProjectileSet(ID2D1HwndRenderTarget* _d2d_render_target, std::sha
 	spaceship = _spaceship;
 }
 
+void ProjectileSet::getProjectiles(std::vector<std::shared_ptr<Projectile>>& _projectiles) {
+	_projectiles = projectiles;
+}
+
 void ProjectileSet::draw() {
 	if (GetAsyncKeyState(VK_SPACE) < 0) {
 		if (std::chrono::steady_clock::now() - last_shot > std::chrono::milliseconds(time_between_shots)) {
@@ -16,5 +20,5 @@ void ProjectileSet::draw() {
 		projectiles[i]->draw();
 	}
 
-	std::erase_if(projectiles, [](const std::shared_ptr<Projectile> projectile) { return projectile->isOutOfBounds(); });
+	std::erase_if(projectiles, [](const std::shared_ptr<Projectile> projectile) { return projectile->is_out_of_bounds(); });
 }

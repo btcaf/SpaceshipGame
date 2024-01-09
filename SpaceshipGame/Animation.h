@@ -5,8 +5,6 @@
 
 void paint(HWND hwnd);
 
-void timer();
-
 void destroy();
 
 #endif // ANIMATION_H

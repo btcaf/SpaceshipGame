@@ -63,7 +63,6 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
     case WM_TIMER:
     {
-        timer();
         InvalidateRect(hwnd, NULL, FALSE);
         break;
     }

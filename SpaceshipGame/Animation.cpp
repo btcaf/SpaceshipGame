@@ -2,6 +2,8 @@
 #include "Background.h"
 #include "Spaceship.h"
 #include "ProjectileSet.h"
+#include "AsteroidSet.h"
+#include "GameInfo.h"
 #include "util.h"
 
 #include <ctime>
@@ -14,8 +16,11 @@ namespace {
     ID2D1Factory7* d2d_factory = nullptr;
     ID2D1HwndRenderTarget* d2d_render_target = nullptr;
     std::shared_ptr<Background> background = nullptr;
+    std::shared_ptr<GameInfo> game_info = nullptr;
     std::shared_ptr<Spaceship> spaceship = nullptr;
     std::shared_ptr<ProjectileSet> projectile_set = nullptr;
+    std::shared_ptr<AsteroidSet> asteroid_set = nullptr;
+    bool new_game = true;
 
     D2D1_COLOR_F const clear_color = {
         .r = 0.0f, .g = 0.0f, .b = 0.0f, .a = 1.0f
@@ -43,6 +48,36 @@ namespace {
             &d2d_render_target
         ));
     }
+
+    void check_collisions() {
+        std::vector<std::shared_ptr<Projectile>> projectiles;
+		projectile_set->getProjectiles(projectiles);
+		std::vector<std::shared_ptr<Asteroid>> asteroids;
+		asteroid_set->getAsteroids(asteroids);
+
+        for (size_t i = 0; i < projectiles.size(); ++i) {
+            for (size_t j = 0; j < asteroids.size(); ++j) {
+                if (projectiles[i]->is_exploding() || asteroids[j]->is_exploding()) {
+                    continue;
+                }
+                if (check_collision(projectiles[i]->get_hitbox(), asteroids[j]->get_hitbox())) {
+					game_info->add_point();
+                    asteroids[j]->explode();
+                    projectiles[i]->explode();
+				}
+			}
+		}
+
+        for (size_t i = 0; i < asteroids.size(); ++i) {
+            if (asteroids[i]->is_exploding()) {
+                continue;
+            }
+            if (check_collision(asteroids[i]->get_hitbox(), spaceship->get_hitbox())) {
+                asteroids[i]->explode();
+				game_info->lose_life();
+			}
+		}
+    }
 }
 
 
@@ -54,25 +89,37 @@ void paint(HWND hwnd) {
         srand(static_cast<unsigned> (time(0)));
         init_d2d(hwnd);
         hr_check(CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED));
+    }
+
+    if (new_game) {
         background = std::make_shared<Background>(d2d_render_target);
         spaceship = std::make_shared<Spaceship>(d2d_render_target, L"assets/spaceship.png");
         projectile_set = std::make_shared<ProjectileSet>(d2d_render_target, spaceship);
+        asteroid_set = std::make_shared<AsteroidSet>(d2d_render_target);
+        game_info = std::make_shared<GameInfo>(d2d_render_target, d2d_factory);
+        new_game = false;
     }
 
     d2d_render_target->BeginDraw();
     d2d_render_target->Clear(clear_color);
 
-    background->draw();
-    projectile_set->draw();
-    spaceship->draw();
+    if (!game_info->is_game_over()) {
+        background->draw();
+        asteroid_set->draw();
+        projectile_set->draw();
+        spaceship->draw();
+        game_info->draw();
+        check_collisions();
+    } else {
+        game_info->draw_endscreen();
+        if (GetAsyncKeyState(VK_RETURN) < 0) {
+			new_game = true;
+		}
+    }
 
     hr_check(d2d_render_target->EndDraw());
 
     EndPaint(hwnd, &ps);
-}
-
-void timer() {
-
 }
 
 void destroy() {

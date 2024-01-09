@@ -33,38 +33,6 @@ Background::Background(ID2D1HwndRenderTarget* _d2d_render_target) {
     }
 }
 
-Background::Background(const Background& other) {
-	d2d_render_target = other.d2d_render_target;
-	rad_stops = other.rad_stops;
-	rad_brush = other.rad_brush;
-}
-
-Background::Background(Background&& other) noexcept {
-	d2d_render_target = other.d2d_render_target;
-	rad_stops = other.rad_stops;
-	rad_brush = other.rad_brush;
-    other.d2d_render_target = nullptr;
-    other.rad_stops = nullptr;
-    other.rad_brush = nullptr;
-}
-
-Background& Background::operator=(const Background& other) {
-	d2d_render_target = other.d2d_render_target;
-	rad_stops = other.rad_stops;
-	rad_brush = other.rad_brush;
-	return *this;
-}
-
-Background& Background::operator=(Background&& other) noexcept {
-	d2d_render_target = other.d2d_render_target;
-	rad_stops = other.rad_stops;
-	rad_brush = other.rad_brush;
-	other.d2d_render_target = nullptr;
-	other.rad_stops = nullptr;
-	other.rad_brush = nullptr;
-	return *this;
-}
-
 Background::~Background() {
     if (rad_stops) rad_stops->Release();
     if (rad_brush) rad_brush->Release();

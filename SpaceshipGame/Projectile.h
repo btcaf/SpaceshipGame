@@ -1,20 +1,18 @@
 #ifndef PROJECTILE_H
 #define PROJECTILE_H
 
-#include <d2d1.h>
+#include <d2d1_3.h>
 #pragma comment(lib, "d2d1.lib")
 
 class Projectile {
 public:
-	Projectile();
 	Projectile(ID2D1HwndRenderTarget* d2d_render_target, D2D1_POINT_2F position);
-	Projectile(const Projectile& other);
-	Projectile(Projectile&& other) noexcept;
-	Projectile& operator=(const Projectile& other);
-	Projectile& operator=(Projectile&& other) noexcept;
 	~Projectile();
 	void draw();
-	bool isOutOfBounds() const;
+	D2D1_RECT_F get_hitbox() const;
+	void explode();
+	bool is_exploding() const;
+	bool is_out_of_bounds() const;
 private:
 	void update();
 	ID2D1GradientStopCollection* rad_stops = nullptr;
@@ -32,6 +30,11 @@ private:
 
 	const float gradient_radius_x = 50.0f;
 	const float gradient_radius_y = 5.0f;
+
+	bool exploding = false;
+	const float max_explosion_radius = 50.0f;
+	float explosion_radius = 0.0f;
+	const float explosion_speed = 10.0f;
 };
 
 #endif // PROJECTILE_H

@@ -36,6 +36,18 @@
     <ClInclude Include="ProjectileSet.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
+    <ClInclude Include="Asteroid.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="AsteroidConfig.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="AsteroidSet.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="GameInfo.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WInMain.cpp">
@@ -59,9 +71,30 @@
     <ClCompile Include="ProjectileSet.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="Asteroid.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="AsteroidSet.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="AsteroidConfig.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="GameInfo.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\spaceship.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="assets\asteroid1.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="assets\asteroid2.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="assets\asteroid3.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
   </ItemGroup>

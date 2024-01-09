@@ -1,17 +1,13 @@
 #ifndef BACKGROUND_H
 #define BACKGROUND_H
 
-#include <d2d1.h>
+#include <d2d1_3.h>
 #pragma comment(lib, "d2d1.lib")
 
 class Background {
 public:
 	Background();
 	Background(ID2D1HwndRenderTarget* d2d_render_target);
-	Background(const Background& other);
-	Background(Background&& other) noexcept;
-	Background& operator=(const Background& other);
-	Background& operator=(Background&& other) noexcept;
 	~Background();
 	void draw();
 	
