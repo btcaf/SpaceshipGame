@@ -10,14 +10,16 @@
 
 class ProjectileSet {
 public:
-	ProjectileSet(ID2D1HwndRenderTarget* _d2d_render_target, std::shared_ptr<Spaceship> _spaceship);
+	ProjectileSet(ID2D1HwndRenderTarget* _d2d_render_target,
+		std::shared_ptr<Spaceship> _spaceship);
 	void getProjectiles(std::vector<std::shared_ptr<Projectile>> &_projectiles);
 	void draw();
 private:
 	ID2D1HwndRenderTarget* d2d_render_target = nullptr;
 	uint64_t time_between_shots = 500;
 	std::shared_ptr<Spaceship> spaceship = nullptr;
-	std::chrono::steady_clock::time_point last_shot = std::chrono::steady_clock::now();
+	std::chrono::steady_clock::time_point last_shot = 
+		std::chrono::steady_clock::now();
 	std::vector<std::shared_ptr<Projectile>> projectiles;
 };
 

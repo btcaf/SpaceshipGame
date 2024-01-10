@@ -51,19 +51,23 @@ void Spaceship::draw() {
 void Spaceship::update() {
 	float x_change = 0.0f;
 	float y_change = 0.0f;
-	if (GetAsyncKeyState(VK_RIGHT) < 0 && position.x + width < d2d_render_target->GetSize().width)
+	if (GetAsyncKeyState(VK_RIGHT) < 0 && 
+			position.x + width < d2d_render_target->GetSize().width)
 		x_change += 1.0f;
 	if (GetAsyncKeyState(VK_LEFT) < 0 && position.x > 0)
 		x_change -= 1.0f;
 	if (GetAsyncKeyState(VK_UP) < 0 && position.y > 0)
 		y_change -= 1.0f;
-	if (GetAsyncKeyState(VK_DOWN) < 0 && position.y + height < d2d_render_target->GetSize().height)
+	if (GetAsyncKeyState(VK_DOWN) < 0 && 
+			position.y + height < d2d_render_target->GetSize().height)
 		y_change += 1.0f;
 
 	if (x_change) {
-		position.x += x_change / sqrt(x_change * x_change + y_change * y_change) * speed;
+		position.x += x_change / 
+			sqrt(x_change * x_change + y_change * y_change) * speed;
 	}
 	if (y_change) {
-		position.y += y_change / sqrt(x_change * x_change + y_change * y_change) * speed;
+		position.y += y_change / 
+			sqrt(x_change * x_change + y_change * y_change) * speed;
 	}
 }

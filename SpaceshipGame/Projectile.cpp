@@ -88,7 +88,10 @@ void Projectile::explode() {
 	if (rad_stops) {
 		hr_check(d2d_render_target->CreateRadialGradientBrush(
 			D2D1::RadialGradientBrushProperties(
-				D2D1::Point2F(0, 0), D2D1::Point2F(0, 0), max_explosion_radius, max_explosion_radius
+				D2D1::Point2F(0, 0), 
+				D2D1::Point2F(0, 0),
+				max_explosion_radius,
+				max_explosion_radius
 			),
 			rad_stops,
 			&rad_brush

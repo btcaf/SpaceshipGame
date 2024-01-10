@@ -17,7 +17,8 @@ private:
 	const unsigned int min_time_between_asteroids = 300;
 	const unsigned int max_time_between_asteroids = 1000;
 	unsigned int time_between_asteroids = 1000;
-	std::chrono::steady_clock::time_point last_asteroid = std::chrono::steady_clock::now();
+	std::chrono::steady_clock::time_point last_asteroid =
+		std::chrono::steady_clock::now();
 	std::vector<std::shared_ptr<Asteroid>> asteroids;
 };
 

@@ -5,14 +5,17 @@ AsteroidSet::AsteroidSet(ID2D1HwndRenderTarget* _d2d_render_target) {
 	d2d_render_target = _d2d_render_target;
 }
 
-void AsteroidSet::getAsteroids(std::vector<std::shared_ptr<Asteroid>>& _asteroids) {
+void AsteroidSet::getAsteroids(std::vector<std::shared_ptr<Asteroid>>& 
+		_asteroids) {
 	_asteroids = asteroids;
 }
 
 void AsteroidSet::draw() {
-	if (std::chrono::steady_clock::now() - last_asteroid > std::chrono::milliseconds(time_between_asteroids)) {
+	if (std::chrono::steady_clock::now() - last_asteroid >
+			std::chrono::milliseconds(time_between_asteroids)) {
 		last_asteroid = std::chrono::steady_clock::now();
-		time_between_asteroids = rand_int(min_time_between_asteroids, max_time_between_asteroids);
+		time_between_asteroids = rand_int(min_time_between_asteroids,
+			max_time_between_asteroids);
 		asteroids.push_back(std::make_shared<Asteroid>(d2d_render_target));
 	}
 
@@ -20,5 +23,6 @@ void AsteroidSet::draw() {
 		asteroids[i]->draw();
 	}
 
-	std::erase_if(asteroids, [](const std::shared_ptr<Asteroid> asteroid) { return asteroid->is_out_of_bounds(); });
+	std::erase_if(asteroids, [](const std::shared_ptr<Asteroid> asteroid) 
+		{ return asteroid->is_out_of_bounds(); });
 }

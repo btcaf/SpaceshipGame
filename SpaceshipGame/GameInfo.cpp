@@ -1,7 +1,8 @@
 #include "GameInfo.h"
 #include "util.h"
 
-GameInfo::GameInfo(ID2D1HwndRenderTarget* _d2d_render_target, ID2D1Factory7* d2d_factory) {
+GameInfo::GameInfo(ID2D1HwndRenderTarget* _d2d_render_target, 
+		ID2D1Factory7* d2d_factory) {
     d2d_render_target = _d2d_render_target;
     hr_check(DWriteCreateFactory(
         DWRITE_FACTORY_TYPE_SHARED,

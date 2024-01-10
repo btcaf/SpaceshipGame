@@ -9,7 +9,8 @@
 
 class GameInfo {
 public:
-	GameInfo(ID2D1HwndRenderTarget* _d2d_render_target, ID2D1Factory7* d2d_factory);
+	GameInfo(ID2D1HwndRenderTarget* _d2d_render_target, 
+		ID2D1Factory7* d2d_factory);
 	~GameInfo();
 	void add_point();
 	void lose_life();

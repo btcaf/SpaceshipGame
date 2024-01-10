@@ -9,9 +9,11 @@
 
 Asteroid::Asteroid(ID2D1HwndRenderTarget* _d2d_render_target) {
 	d2d_render_target = _d2d_render_target;
-	asteroid_bitmap = load_bitmap(d2d_render_target, get_random_asteroid_path());
+	asteroid_bitmap = load_bitmap(d2d_render_target, 
+		get_random_asteroid_path());
 	height = rand_float(min_height, max_height);
-	width = height * asteroid_bitmap->GetSize().width / asteroid_bitmap->GetSize().height;
+	width = height * asteroid_bitmap->GetSize().width / 
+		asteroid_bitmap->GetSize().height;
 	position.x = d2d_render_target->GetSize().width;
 	position.y = rand_float(0.0f, d2d_render_target->GetSize().height - height);
 	speed = rand_float(min_speed, max_speed);
@@ -104,8 +106,10 @@ void Asteroid::update() {
 			explosion_width -=  0.5f * width / static_cast<float>(explosion_frames);
 			explosion_height -= 0.5f * height / static_cast<float>(explosion_frames);
 			for (int i = 0; i < explosion_pieces; ++i) {
-				explosion_positions[i].x += explosion_move_speed * cos(explosion_angles[i]);
-				explosion_positions[i].y += explosion_move_speed * sin(explosion_angles[i]);
+				explosion_positions[i].x += 
+					explosion_move_speed * cos(explosion_angles[i]);
+				explosion_positions[i].y += 
+					explosion_move_speed * sin(explosion_angles[i]);
 			}
 		}
 		else {
