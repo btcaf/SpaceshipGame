@@ -1,6 +1,10 @@
 #ifndef BACKGROUND_H
 #define BACKGROUND_H
 
+#include "Star.h"
+
+#include <vector>
+#include <memory>
 #include <d2d1_3.h>
 #pragma comment(lib, "d2d1.lib")
 
@@ -24,6 +28,9 @@ private:
 	);
 
 	const float gradient_radius = 400.0f;
+
+	const size_t star_count = 100;
+	std::vector<std::shared_ptr<Star>> stars;
 };
 
 #endif // BACKGROUND_H

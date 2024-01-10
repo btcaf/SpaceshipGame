@@ -31,6 +31,10 @@ Background::Background(ID2D1HwndRenderTarget* _d2d_render_target) {
             &rad_brush
         ));
     }
+
+    for (size_t i = 0; i < star_count; ++i) {
+        stars.push_back(std::make_shared<Star>(d2d_render_target));
+    }
 }
 
 Background::~Background() {
@@ -48,4 +52,8 @@ void Background::draw() {
         ),
 		rad_brush
 	);
+
+    for (size_t i = 0; i < star_count; ++i) {
+		stars[i]->draw();
+	}
 }
