@@ -71,6 +71,7 @@ void Projectile::draw() {
 	);
 }
 
+// the hitbox is the circumscribed rectangle
 D2D1_RECT_F Projectile::get_hitbox() const {
 	return D2D1::RectF(
 		position.x - gradient_radius_x,
@@ -100,7 +101,8 @@ bool Projectile::is_exploding() const {
 }
 
 bool Projectile::is_out_of_bounds() const {
-	return position.x > d2d_render_target->GetSize().width + gradient_radius_x;
+	return (position.x > d2d_render_target->GetSize().width + gradient_radius_x) ||
+		explosion_finished;
 }
 
 void Projectile::update() {
@@ -110,7 +112,7 @@ void Projectile::update() {
 	else {
 		explosion_radius += explosion_speed;
 		if (explosion_radius > max_explosion_radius) {
-			position.x = d2d_render_target->GetSize().width + 10 * gradient_radius_x;
+			explosion_finished = true;
 		}
 	}
 }

@@ -28,8 +28,10 @@ private:
 	const float min_speed = 4.0f;
 	const float max_speed = 10.0f;
 	float speed;
+	const float hitbox_scale = 0.8f;
 
 	bool exploding = false;
+	bool explosion_finished = false;
 	float explosion_angles[explosion_pieces];
 	D2D1_POINT_2F explosion_positions[explosion_pieces];
 	float piece_angles[explosion_pieces];

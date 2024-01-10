@@ -32,6 +32,7 @@ private:
 	const float gradient_radius_y = 5.0f;
 
 	bool exploding = false;
+	bool explosion_finished = false;
 	const float max_explosion_radius = 50.0f;
 	float explosion_radius = 0.0f;
 	const float explosion_speed = 10.0f;

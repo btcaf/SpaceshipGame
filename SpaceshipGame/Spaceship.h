@@ -21,6 +21,7 @@ private:
 	const float height = 100.0f;
 	const float speed = 5.0f;
 	float front = 300.0f / 416.0f;
+	const float hitbox_scale = 0.8f;
 };
 
 #endif // SPACESHIP_H

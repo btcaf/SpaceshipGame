@@ -65,11 +65,13 @@ void Asteroid::draw() {
 }
 
 D2D1_RECT_F Asteroid::get_hitbox() const {
+	float multiplier_1 = (1.0f + hitbox_scale) / 2.0f;
+	float multiplier_2 = 1.0f - multiplier_1;
 	return D2D1::RectF(
-		0.9f * position.x + 0.1f * (position.x + width),
-		0.9f * position.y + 0.1f * (position.y + height),
-		0.9f * (position.x + width) + 0.1f * position.x,
-		0.9f * (position.y + height) + 0.1f * position.y
+		multiplier_1 * position.x + multiplier_2 * (position.x + width),
+		multiplier_1 * position.y + multiplier_2 * (position.y + height),
+		multiplier_1 * (position.x + width) + multiplier_2 * position.x,
+		multiplier_1 * (position.y + height) + multiplier_2 * position.y
 	);
 }
 
@@ -90,7 +92,7 @@ bool Asteroid::is_exploding() const {
 }
 
 bool Asteroid::is_out_of_bounds() const {
-	return position.x < -width;
+	return position.x < -width || explosion_finished;
 }
 
 void Asteroid::update() {
@@ -107,7 +109,7 @@ void Asteroid::update() {
 			}
 		}
 		else {
-			position.x = -width * 2.0f;
+			explosion_finished = true;
 		}
 	}
 }
