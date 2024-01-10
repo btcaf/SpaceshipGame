@@ -14,9 +14,9 @@ public:
 	void draw();
 private:
 	ID2D1HwndRenderTarget* d2d_render_target = nullptr;
-	const uint64_t min_time_between_asteroids = 300;
-	const uint64_t max_time_between_asteroids = 1000;
-	uint64_t time_between_asteroids = 1000;
+	const unsigned int min_time_between_asteroids = 300;
+	const unsigned int max_time_between_asteroids = 1000;
+	unsigned int time_between_asteroids = 1000;
 	std::chrono::steady_clock::time_point last_asteroid = std::chrono::steady_clock::now();
 	std::vector<std::shared_ptr<Asteroid>> asteroids;
 };

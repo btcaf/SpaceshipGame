@@ -37,7 +37,6 @@ private:
 	float explosion_height;
 	float explosion_width;
 	const float explosion_move_speed = 8.0f;
-	const float explosion_rotation_speed = 0.1f;
 	const unsigned int explosion_frames = 30;
 };
 

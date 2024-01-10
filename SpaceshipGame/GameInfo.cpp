@@ -22,11 +22,17 @@ GameInfo::GameInfo(ID2D1HwndRenderTarget* _d2d_render_target, ID2D1Factory7* d2d
 
 	text_format->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_TRAILING);
 
-    hr_check(d2d_render_target->CreateSolidColorBrush(text_color,
-        &text_brush));
+    hr_check(d2d_render_target->CreateSolidColorBrush(normal_text_color,
+        &normal_text_brush));
 
-	hr_check(d2d_render_target->CreateSolidColorBrush(game_over_color,
-		&game_over_brush));
+	hr_check(d2d_render_target->CreateSolidColorBrush(game_over_text_color,
+		&game_over_text_brush));
+
+	hr_check(d2d_render_target->CreateSolidColorBrush(heart_boundary_color,
+		&heart_boundary_brush));
+
+	hr_check(d2d_render_target->CreateSolidColorBrush(heart_interior_color,
+		&heart_interior_brush));
 
 	hr_check(d2d_factory->CreatePathGeometry(&path));
 
@@ -67,8 +73,10 @@ GameInfo::GameInfo(ID2D1HwndRenderTarget* _d2d_render_target, ID2D1Factory7* d2d
 }
 
 GameInfo::~GameInfo() {
-    if (text_brush) text_brush->Release();
-	if (game_over_brush) game_over_brush->Release();
+    if (normal_text_brush) normal_text_brush->Release();
+	if (game_over_text_brush) game_over_text_brush->Release();
+	if (heart_boundary_brush) heart_boundary_brush->Release();
+	if (heart_interior_brush) heart_interior_brush->Release();
     if (text_format) text_format->Release();
     if (write_factory) write_factory->Release();
 	if (path_sink) path_sink->Release();
@@ -93,10 +101,10 @@ void GameInfo::draw() {
 
     d2d_render_target->DrawText(
 		score_str.c_str(),
-		score_str.length(),
+		static_cast<UINT32>(score_str.length()),
 		text_format,
 		D2D1::RectF(0.0f, font_size, screen_width, 0.0f),
-		text_brush
+		normal_text_brush
 	);
 
 	for (int i = 0; i < lives; ++i) {
@@ -117,13 +125,13 @@ void GameInfo::draw() {
 
 		d2d_render_target->DrawGeometry(
 			path,
-			text_brush,
+			heart_boundary_brush,
 			10.0f
 		);
 
 		d2d_render_target->FillGeometry(
 			path,
-			game_over_brush
+			heart_interior_brush
 		);
 
 		d2d_render_target->SetTransform(D2D1::Matrix3x2F::Identity());
@@ -138,25 +146,25 @@ void GameInfo::draw_endscreen() {
 
     d2d_render_target->DrawText(
 		endscreen_text1.c_str(),
-		endscreen_text1.length(),
+		static_cast<UINT32>(endscreen_text1.length()),
 		text_format,
 		D2D1::RectF(0.0f, screen_height / 2 - font_size, screen_width, screen_height),
-		game_over_brush
+		game_over_text_brush
 	);
 
 	d2d_render_target->DrawText(
 		score_str.c_str(),
-		score_str.length(),
+		static_cast<UINT32>(score_str.length()),
 		text_format,
 		D2D1::RectF(0.0f, screen_height / 2, screen_width, screen_height / 2 + font_size),
-		text_brush
+		normal_text_brush
 	);
 
 	d2d_render_target->DrawText(
 		endscreen_text3.c_str(),
-		endscreen_text3.length(),
+		static_cast<UINT32>(endscreen_text3.length()),
 		text_format,
 		D2D1::RectF(0.0f, screen_height / 2 + font_size, screen_width, screen_height / 2 + 2 * font_size),
-		text_brush
+		normal_text_brush
 	);
 }

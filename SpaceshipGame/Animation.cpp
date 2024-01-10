@@ -57,10 +57,12 @@ namespace {
 
         for (size_t i = 0; i < projectiles.size(); ++i) {
             for (size_t j = 0; j < asteroids.size(); ++j) {
-                if (projectiles[i]->is_exploding() || asteroids[j]->is_exploding()) {
+                if (projectiles[i]->is_exploding() || 
+                        asteroids[j]->is_exploding()) {
                     continue;
                 }
-                if (check_collision(projectiles[i]->get_hitbox(), asteroids[j]->get_hitbox())) {
+                if (check_collision(projectiles[i]->get_hitbox(),
+                        asteroids[j]->get_hitbox())) {
 					game_info->add_point();
                     asteroids[j]->explode();
                     projectiles[i]->explode();
@@ -72,7 +74,8 @@ namespace {
             if (asteroids[i]->is_exploding()) {
                 continue;
             }
-            if (check_collision(asteroids[i]->get_hitbox(), spaceship->get_hitbox())) {
+            if (check_collision(asteroids[i]->get_hitbox(),
+                    spaceship->get_hitbox())) {
                 asteroids[i]->explode();
 				game_info->lose_life();
 			}
@@ -83,7 +86,9 @@ namespace {
 
 void paint(HWND hwnd) {
     PAINTSTRUCT ps;
-    HDC hdc = BeginPaint(hwnd, &ps);
+    if (BeginPaint(hwnd, &ps) == nullptr) {
+        exit(1);
+    }
 
     if (!d2d_render_target) {
         srand(static_cast<unsigned> (time(0)));
@@ -93,8 +98,10 @@ void paint(HWND hwnd) {
 
     if (new_game) {
         background = std::make_shared<Background>(d2d_render_target);
-        spaceship = std::make_shared<Spaceship>(d2d_render_target, L"assets/spaceship.png");
-        projectile_set = std::make_shared<ProjectileSet>(d2d_render_target, spaceship);
+        spaceship = std::make_shared<Spaceship>(d2d_render_target, 
+            L"assets/spaceship.png");
+        projectile_set = std::make_shared<ProjectileSet>(d2d_render_target, 
+            spaceship);
         asteroid_set = std::make_shared<AsteroidSet>(d2d_render_target);
         game_info = std::make_shared<GameInfo>(d2d_render_target, d2d_factory);
         new_game = false;

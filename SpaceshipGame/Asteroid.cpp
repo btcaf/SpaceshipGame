@@ -66,10 +66,10 @@ void Asteroid::draw() {
 
 D2D1_RECT_F Asteroid::get_hitbox() const {
 	return D2D1::RectF(
-		0.9 * position.x + 0.1 * (position.x + width),
-		0.9 * position.y + 0.1 * (position.y + height),
-		0.9 * (position.x + width) + 0.1 * position.x,
-		0.9 * (position.y + height) + 0.1 * position.y
+		0.9f * position.x + 0.1f * (position.x + width),
+		0.9f * position.y + 0.1f * (position.y + height),
+		0.9f * (position.x + width) + 0.1f * position.x,
+		0.9f * (position.y + height) + 0.1f * position.y
 	);
 }
 
@@ -78,10 +78,10 @@ void Asteroid::explode() {
 	explosion_height = height / 2;
 	explosion_width = width / 2;
 	for (size_t i = 0; i < explosion_pieces; ++i) {
-		explosion_angles[i] = rand_float(0.0f, 2 * M_PI);
+		explosion_angles[i] = rand_float(0.0f, 2 * static_cast<float>(M_PI));
 		explosion_positions[i].x = position.x + width / 4;
 		explosion_positions[i].y = position.y + height / 4;
-		piece_angles[i] = rand_float(0.0f, 2 * M_PI);
+		piece_angles[i] = rand_float(0.0f, 2 * static_cast<float>(M_PI));
 	}
 }
 
@@ -97,13 +97,10 @@ void Asteroid::update() {
 	if (!exploding) {
 		position.x -= speed;
 	} else {
-		for (size_t i = 0; i < explosion_pieces; ++i) {
-			piece_angles[i] += explosion_rotation_speed;
-		}
-		if (explosion_frames > 0) {
-			opacity -= 0.5f / explosion_frames;
-			explosion_width -=  0.5f * width / explosion_frames;
-			explosion_height -= 0.5f * height / explosion_frames;
+		if (opacity > 0.0f) {
+			opacity -= 0.5f / static_cast<float>(explosion_frames);
+			explosion_width -=  0.5f * width / static_cast<float>(explosion_frames);
+			explosion_height -= 0.5f * height / static_cast<float>(explosion_frames);
 			for (int i = 0; i < explosion_pieces; ++i) {
 				explosion_positions[i].x += explosion_move_speed * cos(explosion_angles[i]);
 				explosion_positions[i].y += explosion_move_speed * sin(explosion_angles[i]);

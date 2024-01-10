@@ -2,20 +2,23 @@
 #define UNICODE
 #endif
 
+#include "WinMain.h"
 #include "Animation.h"
-
-#include <windows.h>
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
-{
+INT WINAPI wWinMain(
+_In_ [[maybe_unused]] HINSTANCE instance, 
+_In_opt_ [[maybe_unused]] HINSTANCE prev_instance,
+_In_ [[maybe_unused]] PWSTR cmd_line, 
+_In_ [[maybe_unused]] INT cmd_show
+) {
     const wchar_t CLASS_NAME[] = L"Sample Window Class";
 
     WNDCLASS wc = { };
 
     wc.lpfnWndProc = WindowProc;
-    wc.hInstance = hInstance;
+    wc.hInstance = instance;
     wc.lpszClassName = CLASS_NAME;
 
     RegisterClass(&wc);
@@ -28,7 +31,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
         CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
         NULL,
         NULL,
-        hInstance,
+        instance,
         NULL
     );
 
@@ -37,7 +40,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
         return 0;
     }
 
-    ShowWindow(hwnd, nCmdShow);
+    ShowWindow(hwnd, cmd_show);
 
     SetTimer(hwnd, 1, 1000 / 60, (TIMERPROC)NULL);
 

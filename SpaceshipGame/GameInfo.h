@@ -19,8 +19,10 @@ public:
 private:
 	ID2D1RenderTarget* d2d_render_target = nullptr;
 	IDWriteFactory* write_factory = nullptr;
-	ID2D1SolidColorBrush* text_brush = nullptr;
-	ID2D1SolidColorBrush* game_over_brush = nullptr;
+	ID2D1SolidColorBrush* normal_text_brush = nullptr;
+	ID2D1SolidColorBrush* game_over_text_brush = nullptr;
+	ID2D1SolidColorBrush* heart_boundary_brush = nullptr;
+	ID2D1SolidColorBrush* heart_interior_brush = nullptr;
 	IDWriteTextFormat* text_format = nullptr;
 	ID2D1PathGeometry* path = nullptr;
 	ID2D1GeometrySink* path_sink = nullptr;
@@ -32,11 +34,19 @@ private:
 	const std::wstring endscreen_text3 = L"Press Enter to Play Again";
 	const float font_size = 20.0f;
 
-	const D2D1_COLOR_F text_color = {
+	const D2D1_COLOR_F normal_text_color = {
 		.r = 0.0f, .g = 1.0f, .b = 0.0f, .a = 1.0f
 	};
 
-	const D2D1_COLOR_F game_over_color = {
+	const D2D1_COLOR_F game_over_text_color = {
+		.r = 1.0f, .g = 0.0f, .b = 0.0f, .a = 1.0f
+	};
+
+	const D2D1_COLOR_F heart_boundary_color = {
+		.r = 0.0f, .g = 1.0f, .b = 0.0f, .a = 1.0f
+	};
+
+	const D2D1_COLOR_F heart_interior_color = {
 		.r = 1.0f, .g = 0.0f, .b = 0.0f, .a = 1.0f
 	};
 

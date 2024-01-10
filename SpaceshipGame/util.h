@@ -11,7 +11,7 @@ void hr_check(HRESULT hr);
 
 float rand_float(float low, float high);
 
-int rand_int(int low, int high);
+unsigned int rand_int(unsigned int low, unsigned int high);
 
 bool check_collision(D2D1_RECT_F rect1, D2D1_RECT_F rect2);
 

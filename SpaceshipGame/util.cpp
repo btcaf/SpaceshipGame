@@ -10,18 +10,23 @@ void hr_check(HRESULT hr) {
 }
 
 float rand_float(float low, float high) {
-	return low + static_cast<float> (rand()) / (static_cast<float> (RAND_MAX) / (high - low));
+	return low + static_cast<float> (rand()) / 
+		(static_cast<float> (RAND_MAX) / (high - low));
 }
 
-int rand_int(int low, int high) {
+unsigned int rand_int(unsigned int low, unsigned int high) {
 	return rand() % (high - low + 1) + low;
 }
 
 bool check_collision(D2D1_RECT_F rect1, D2D1_RECT_F rect2) {
-	return rect1.left < rect2.right && rect1.right > rect2.left && rect1.top < rect2.bottom && rect1.bottom > rect2.top;
+	return rect1.left < rect2.right && 
+		   rect1.right > rect2.left && 
+		   rect1.top < rect2.bottom && 
+		   rect1.bottom > rect2.top;
 }
 
-ID2D1Bitmap* load_bitmap(ID2D1RenderTarget* render_target, const std::wstring& path) {
+ID2D1Bitmap* load_bitmap(ID2D1RenderTarget* render_target, 
+		const std::wstring& path) {
 	IWICImagingFactory* wic_factory = nullptr;
 	hr_check(CoCreateInstance(
 		CLSID_WICImagingFactory, 
