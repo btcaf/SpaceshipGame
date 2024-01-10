@@ -149,7 +149,12 @@ void GameInfo::draw_endscreen() {
 		endscreen_text1.c_str(),
 		static_cast<UINT32>(endscreen_text1.length()),
 		text_format,
-		D2D1::RectF(0.0f, screen_height / 2 - font_size, screen_width, screen_height),
+		D2D1::RectF(
+			0.0f, 
+			screen_height / 2.0f - font_size, 
+			screen_width, 
+			screen_height
+		),
 		game_over_text_brush
 	);
 
@@ -157,7 +162,12 @@ void GameInfo::draw_endscreen() {
 		score_str.c_str(),
 		static_cast<UINT32>(score_str.length()),
 		text_format,
-		D2D1::RectF(0.0f, screen_height / 2, screen_width, screen_height / 2 + font_size),
+		D2D1::RectF(
+			0.0f, 
+			screen_height / 2.0f, 
+			screen_width, 
+			screen_height / 2.0f + font_size
+		),
 		normal_text_brush
 	);
 
@@ -165,7 +175,12 @@ void GameInfo::draw_endscreen() {
 		endscreen_text3.c_str(),
 		static_cast<UINT32>(endscreen_text3.length()),
 		text_format,
-		D2D1::RectF(0.0f, screen_height / 2 + font_size, screen_width, screen_height / 2 + 2 * font_size),
+		D2D1::RectF(
+			0.0f, 
+			screen_height / 2.0f + font_size, 
+			screen_width, 
+			screen_height / 2.0f + 2.0f * font_size
+		),
 		normal_text_brush
 	);
 }

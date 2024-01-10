@@ -19,7 +19,10 @@ Projectile::Projectile(ID2D1HwndRenderTarget* _d2d_render_target, D2D1_POINT_2F 
 	if (rad_stops) {
 		hr_check(d2d_render_target->CreateRadialGradientBrush(
 			D2D1::RadialGradientBrushProperties(
-				D2D1::Point2F(0, 0), D2D1::Point2F(0, 0), gradient_radius_x, gradient_radius_y
+				D2D1::Point2F(0.0f, 0.0f), 
+				D2D1::Point2F(0.0f, 0.0f), 
+				gradient_radius_x, 
+				gradient_radius_y
 			),
 			rad_stops,
 			&rad_brush
@@ -71,7 +74,6 @@ void Projectile::draw() {
 	);
 }
 
-// the hitbox is the circumscribed rectangle
 D2D1_RECT_F Projectile::get_hitbox() const {
 	return D2D1::RectF(
 		position.x - gradient_radius_x,
@@ -88,8 +90,8 @@ void Projectile::explode() {
 	if (rad_stops) {
 		hr_check(d2d_render_target->CreateRadialGradientBrush(
 			D2D1::RadialGradientBrushProperties(
-				D2D1::Point2F(0, 0), 
-				D2D1::Point2F(0, 0),
+				D2D1::Point2F(0.0f, 0.0f), 
+				D2D1::Point2F(0.0f, 0.0f),
 				max_explosion_radius,
 				max_explosion_radius
 			),
@@ -104,8 +106,8 @@ bool Projectile::is_exploding() const {
 }
 
 bool Projectile::is_out_of_bounds() const {
-	return (position.x > d2d_render_target->GetSize().width + gradient_radius_x) ||
-		explosion_finished;
+	return (position.x > d2d_render_target->GetSize().width +
+		gradient_radius_x) || explosion_finished;
 }
 
 void Projectile::update() {

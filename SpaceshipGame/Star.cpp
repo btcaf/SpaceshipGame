@@ -19,7 +19,10 @@ Star::Star(ID2D1HwndRenderTarget* _d2d_render_target) {
 	if (rad_stops) {
 		hr_check(d2d_render_target->CreateRadialGradientBrush(
 			D2D1::RadialGradientBrushProperties(
-				D2D1::Point2F(0, 0), D2D1::Point2F(0, 0), gradient_radius, gradient_radius
+				D2D1::Point2F(0.0f, 0.0f),
+				D2D1::Point2F(0.0f, 0.0f),
+				gradient_radius,
+				gradient_radius
 			),
 			rad_stops,
 			&rad_brush

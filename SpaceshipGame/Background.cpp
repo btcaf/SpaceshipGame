@@ -19,13 +19,13 @@ Background::Background(ID2D1HwndRenderTarget* _d2d_render_target) {
     ));
 
     D2D1_POINT_2F center = D2D1::Point2F(
-        d2d_render_target->GetSize().width / 2,
-        d2d_render_target->GetSize().height / 2);
+        d2d_render_target->GetSize().width / 2.0f,
+        d2d_render_target->GetSize().height / 2.0f);
 
     if (rad_stops) {
         hr_check(d2d_render_target->CreateRadialGradientBrush(
             D2D1::RadialGradientBrushProperties(
-                center, D2D1::Point2F(0, 0), gradient_radius, gradient_radius
+                center, D2D1::Point2F(0.0f, 0.0f), gradient_radius, gradient_radius
             ),
             rad_stops,
             &rad_brush
@@ -45,8 +45,8 @@ Background::~Background() {
 void Background::draw() {
     d2d_render_target->FillRectangle(
 		D2D1::RectF(
-            0, 
-            0, 
+            0.0f, 
+            0.0f, 
             d2d_render_target->GetSize().width, 
             d2d_render_target->GetSize().height
         ),
