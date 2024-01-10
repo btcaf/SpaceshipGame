@@ -98,8 +98,7 @@ void paint(HWND hwnd) {
 
     if (new_game) {
         background = std::make_shared<Background>(d2d_render_target);
-        spaceship = std::make_shared<Spaceship>(d2d_render_target, 
-            L"assets/spaceship.png");
+        spaceship = std::make_shared<Spaceship>(d2d_render_target);
         projectile_set = std::make_shared<ProjectileSet>(d2d_render_target, 
             spaceship);
         asteroid_set = std::make_shared<AsteroidSet>(d2d_render_target);

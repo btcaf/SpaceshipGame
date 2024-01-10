@@ -1,5 +1,5 @@
 #include "Asteroid.h"
-#include "AsteroidConfig.h"
+#include "BitmapConfig.h"
 #include "util.h"
 
 #include <cmath>

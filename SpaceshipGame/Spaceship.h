@@ -7,7 +7,7 @@
 
 class Spaceship {
 public:
-	Spaceship(ID2D1HwndRenderTarget* d2d_render_target, const std::wstring &path);
+	Spaceship(ID2D1HwndRenderTarget* d2d_render_target);
 	~Spaceship();
 	D2D1_POINT_2F get_front() const;
 	D2D1_RECT_F get_hitbox() const;

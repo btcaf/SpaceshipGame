@@ -1,11 +1,12 @@
 #include "Spaceship.h"
+#include "BitmapConfig.h"
 #include "util.h"
 
 #include <cmath>
 
-Spaceship::Spaceship(ID2D1HwndRenderTarget* _d2d_render_target, const std::wstring& path) {
+Spaceship::Spaceship(ID2D1HwndRenderTarget* _d2d_render_target) {
 	d2d_render_target = _d2d_render_target;
-	spaceship_bitmap = load_bitmap(d2d_render_target, path);
+	spaceship_bitmap = load_bitmap(d2d_render_target, get_spaceship_path());
 	position.y = d2d_render_target->GetSize().height / 2 - height / 2;
 	width = height * spaceship_bitmap->GetSize().width / spaceship_bitmap->GetSize().height;
 }
@@ -23,10 +24,10 @@ D2D1_POINT_2F Spaceship::get_front() const {
 
 D2D1_RECT_F Spaceship::get_hitbox() const {
 	return D2D1::RectF(
-		0.9 * position.x + 0.1 * (position.x + width),
-		0.9 * position.y + 0.1 * (position.y + height),
-		0.9 * (position.x + width) + 0.1 * position.x,
-		0.9 * (position.y + height) + 0.1 * position.y
+		0.9f * position.x + 0.1f * (position.x + width),
+		0.9f * position.y + 0.1f * (position.y + height),
+		0.9f * (position.x + width) + 0.1f * position.x,
+		0.9f * (position.y + height) + 0.1f * position.y
 	);
 }
 

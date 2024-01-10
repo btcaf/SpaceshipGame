@@ -131,7 +131,7 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Asteroid.h" />
-    <ClInclude Include="AsteroidConfig.h" />
+    <ClInclude Include="BitmapConfig.h" />
     <ClInclude Include="AsteroidSet.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="GameInfo.h" />
@@ -144,7 +144,7 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Asteroid.cpp" />
-    <ClCompile Include="AsteroidConfig.cpp" />
+    <ClCompile Include="BitmapConfig.cpp" />
     <ClCompile Include="AsteroidSet.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="GameInfo.cpp" />

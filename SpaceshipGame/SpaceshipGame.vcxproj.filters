@@ -39,7 +39,7 @@
     <ClInclude Include="Asteroid.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="AsteroidConfig.h">
+    <ClInclude Include="BitmapConfig.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="AsteroidSet.h">
@@ -77,7 +77,7 @@
     <ClCompile Include="AsteroidSet.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="AsteroidConfig.cpp">
+    <ClCompile Include="BitmapConfig.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="GameInfo.cpp">
