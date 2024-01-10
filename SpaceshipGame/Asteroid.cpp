@@ -7,9 +7,9 @@
 #define M_PI 3.14159265358979323846
 #endif
 
-Asteroid::Asteroid(ID2D1HwndRenderTarget* _d2d_render_target, size_t type) {
+Asteroid::Asteroid(ID2D1HwndRenderTarget* _d2d_render_target) {
 	d2d_render_target = _d2d_render_target;
-	asteroid_bitmap = load_bitmap(d2d_render_target, get_asteroid_path(type));
+	asteroid_bitmap = load_bitmap(d2d_render_target, get_random_asteroid_path());
 	height = rand_float(min_height, max_height);
 	width = height * asteroid_bitmap->GetSize().width / asteroid_bitmap->GetSize().height;
 	position.x = d2d_render_target->GetSize().width;

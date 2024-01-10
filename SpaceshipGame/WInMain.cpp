@@ -13,7 +13,7 @@ _In_opt_ [[maybe_unused]] HINSTANCE prev_instance,
 _In_ [[maybe_unused]] PWSTR cmd_line, 
 _In_ [[maybe_unused]] INT cmd_show
 ) {
-    const wchar_t CLASS_NAME[] = L"Sample Window Class";
+    const wchar_t CLASS_NAME[] = L"Spaceship Game";
 
     WNDCLASS wc = { };
 
@@ -26,7 +26,7 @@ _In_ [[maybe_unused]] INT cmd_show
     HWND hwnd = CreateWindowEx(
         0,
         CLASS_NAME,
-        L"SpaceshipGame",
+        L"Spaceship Game",
         WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
         NULL,

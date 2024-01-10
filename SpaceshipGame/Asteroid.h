@@ -8,7 +8,7 @@ constexpr unsigned int explosion_pieces = 5;
 
 class Asteroid {
 public:
-	Asteroid(ID2D1HwndRenderTarget* d2d_render_target, size_t type);
+	Asteroid(ID2D1HwndRenderTarget* d2d_render_target);
 	~Asteroid();
 	void draw();
 	D2D1_RECT_F get_hitbox() const;

@@ -3,8 +3,6 @@
 
 #include <string>
 
-constexpr size_t asteroid_type_count = 3;
-
-std::wstring get_asteroid_path(size_t asteroid_type);
+std::wstring get_random_asteroid_path();
 
 #endif // ASTEROID_CONFIG_H
