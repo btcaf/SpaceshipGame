@@ -20,7 +20,7 @@ _In_ [[maybe_unused]] INT cmd_show
     wc.lpfnWndProc = WindowProc;
     wc.hInstance = instance;
     wc.lpszClassName = CLASS_NAME;
-
+    
     RegisterClass(&wc);
 
     HWND hwnd = CreateWindowEx(
@@ -29,23 +29,23 @@ _In_ [[maybe_unused]] INT cmd_show
         L"Spaceship Game",
         WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
-        NULL,
-        NULL,
+        nullptr,
+        nullptr,
         instance,
-        NULL
+        nullptr
     );
 
-    if (hwnd == NULL)
+    if (hwnd == nullptr)
     {
         return 0;
     }
 
     ShowWindow(hwnd, cmd_show);
 
-    SetTimer(hwnd, 1, 1000 / 60, (TIMERPROC)NULL);
+    SetTimer(hwnd, 1, 1000 / 60, (TIMERPROC)nullptr);
 
     MSG msg = { };
-    while (GetMessage(&msg, NULL, 0, 0) > 0)
+    while (GetMessage(&msg, nullptr, 0, 0) > 0)
     {
         TranslateMessage(&msg);
         DispatchMessage(&msg);
@@ -66,7 +66,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
     case WM_TIMER:
     {
-        InvalidateRect(hwnd, NULL, FALSE);
+        InvalidateRect(hwnd, nullptr, FALSE);
         break;
     }
     case WM_PAINT:
